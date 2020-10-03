@@ -36,7 +36,6 @@ def encryption():
 	plaintext = input("Message = ")
 
 	ciphertext = ""
-	counter = 0
 
 	for i in plaintext:
 		n = Tableindex(i)
@@ -59,5 +58,45 @@ def Tableindex(n):
 		else:
 			counter += 1
 	return -1
-			
+
+def decryption():
+	while True:
+		key1 = eval(input("Key1 = "))
+
+		key2 = eval(input("key2 = "))
+
+		if gcd(key1, key2) != 1:
+			print("Learn modular arithemetic")
+		else:
+			break
+		
+
+	ciphertext = input("Message = ")
+
+	plaintext = ""
+
+	for i in ciphertext:
+		n = Tableindex(i)
+		if n >= 0 and n < 26:
+			if ((n - key2) % key1 ) == 0:
+				p = (n - key2) // key1
+				plaintext += table[p]
+			else:
+				while ((n - key2) % key1 ) != 0:
+					n += 26				
+				p = (n - key2) // key1
+				plaintext += table[p]
+		elif i == " " or isdigit(i):
+			plaintext += i
+		else:
+			print("Learn how to write")
+			sys.exit()
+
+	print(plaintext)
+
+
+try:
+	main()
+except KeyboardInterrupt:
+	sys.exit()
 
